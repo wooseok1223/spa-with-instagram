@@ -34,13 +34,19 @@ const Footer = styled.div`
     grid-area:Footer;
     justify-self:center;
 `
+
+const Title = styled.span`
+    align-items:center;
+    font-size:24px;
+`
 export default function AppLayout({children}) {
     return (
         <Container>
             <Header className="Header">
-                <h1 className="Page-title">
-                    <img src={LogoImage} alt="logo" width="103px" height="29px" />
-                </h1>
+                <Title>
+                    {/*<img src={LogoImage} alt="logo" width="103px" height="29px" />*/}
+                    LookBook
+                </Title>
                 <div className="Search">
                     <Input.Search/>
                 </div>
