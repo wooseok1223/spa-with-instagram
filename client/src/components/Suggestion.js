@@ -1,6 +1,5 @@
 import React from 'react'
-import {UserOutlined} from '@ant-design/icons';
-import {Button} from "antd";
+import { Avatar, Button} from "antd";
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -10,9 +9,9 @@ const Container = styled.div`
     margin-bottom:0.5rem;
     
 `
-const Avator = styled.div`
+const People = styled.div`
     justify-self:center;
-     
+    margin-right:0.5em;
 `
 const UserName = styled.div`
 `
@@ -20,14 +19,18 @@ const Action = styled.div`
     justify-self:right;
 `
 
-export default function Suggestion() {
+export default function Suggestion( { suggestionUser} ) {
+    const {username, name, avatar_url} = suggestionUser
+
     return (
         <Container>
-            <Avator>
-                <UserOutlined/>
-            </Avator>
+            <People>
+                <Avatar
+                    size="small"
+                    icon={<img src={"http://localhost:8000" + avatar_url} alt={`${username}'s Avatar`}/>}/>
+            </People>
             <UserName>
-                username
+                {name.length === 0 ? username : name}
             </UserName>
             <Action>
                 <Button size="small"> Follow </Button>

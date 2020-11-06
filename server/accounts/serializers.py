@@ -12,7 +12,13 @@ class SignupSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-
     class Meta:
         model = get_user_model()
         fields = ['pk', 'username', 'password']
+
+
+class SuggestionUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'name', 'avatar_url']

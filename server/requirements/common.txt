@@ -3,4 +3,5 @@ djangorestframework~=3.11.0
 requests
 djangorestframework-jwt
 pillow
+django-pydenticon
 django-cors-headers
