@@ -19,8 +19,8 @@ const Action = styled.div`
     justify-self:right;
 `
 
-export default function Suggestion( { suggestionUser} ) {
-    const {username, name, avatar_url} = suggestionUser
+export default function Suggestion( { suggestionUser, onFollowUser} ) {
+    const {username, name, avatar_url, is_follow} = suggestionUser
 
     return (
         <Container>
@@ -33,7 +33,7 @@ export default function Suggestion( { suggestionUser} ) {
                 {name.length === 0 ? username : name}
             </UserName>
             <Action>
-                <Button size="small"> Follow </Button>
+                {is_follow ? "팔로잉 중" : <Button size="small" onClick={() => {onFollowUser(username)}}> Follow </Button>}
             </Action>
         </Container>
     )

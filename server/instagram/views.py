@@ -7,10 +7,10 @@ from django.db.models import Q
 from django.utils import timezone
 from datetime import timedelta
 
-class PostViewSet(ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
 
+class PostViewSet(ModelViewSet):
+    queryset = Post.objects.all().select_related('author').prefetch_related('tag_set', "like_user_set")
+    serializer_class = PostSerializer
 
     def get_queryset(self):
         timesince = timezone.now() - timedelta(days=3 )
@@ -19,5 +19,5 @@ class PostViewSet(ModelViewSet):
             Q(author=self.request.user) |
             Q(author__in=self.request.user.following_set.all())
         )
-        qs = qs.filter(created_at__gte=timesince)
+        # qs = qs.filter(created_at__gte=timesince)
         return qs
