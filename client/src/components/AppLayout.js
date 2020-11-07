@@ -39,7 +39,7 @@ const Title = styled.span`
     align-items:center;
     font-size:24px;
 `
-export default function AppLayout({children}) {
+export default function AppLayout({children, sidebar}) {
     return (
         <Container>
             <Header className="Header">
@@ -68,8 +68,7 @@ export default function AppLayout({children}) {
                 {children}
             </Contents>
             <Sidebar>
-                <StoryList style={{ marginBottom:"1rem"}}/>
-                <SuggestionList style={{ marginBottom:"1rem"}}/>
+                {sidebar}
             </Sidebar>
             <Footer>
                 &copy; 2020. WOOSEOK

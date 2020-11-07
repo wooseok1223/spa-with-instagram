@@ -13,7 +13,7 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        timesince = timezone.now() - timedelta(days=3 )
+        timesince = timezone.now() - timedelta(days=3)
         qs = super().get_queryset()
         qs = qs.filter(
             Q(author=self.request.user) |
@@ -21,3 +21,7 @@ class PostViewSet(ModelViewSet):
         )
         # qs = qs.filter(created_at__gte=timesince)
         return qs
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+        return super().perform_create(serializer)

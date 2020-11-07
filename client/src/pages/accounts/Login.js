@@ -5,21 +5,23 @@ import {useHistory, useLocation} from 'react-router-dom'
 import {SmileOutlined, FrownOutlined} from '@ant-design/icons';
 import useLocalStorage from "../../utils/useLocalStorage";
 import {setToken, useAppContext} from "../../store";
+import {parseErrorMessages} from "../../utils/forms";
 
 
 const apiUrl = "http://127.0.0.1:8000/accounts/token/"
 
 
 export default function Login() {
-    const { dispatch } = useAppContext()
+    const {dispatch} = useAppContext()
     const location = useLocation()
     const history = useHistory()
     const [fieldErrors, setFieldErrors] = useState({})
     // const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "")
-    const { from : loginRedirectUrl } = location.state || {from :
-            {pathname : '/'}};
+    const {from: loginRedirectUrl} = location.state || {
+        from:
+            {pathname: '/'}
+    };
 
-    console.log(location.state)
 
     const onFinish = (values) => {
         async function fn() {
@@ -31,7 +33,7 @@ export default function Login() {
             try {
                 const response = await Axios.post(apiUrl, data)
 
-                const {data: {token : jwtToken}} = response
+                const {data: {token: jwtToken}} = response
 
                 // setJwtToken(jwtToken)
                 dispatch(setToken(jwtToken))
@@ -51,16 +53,7 @@ export default function Login() {
 
                     const {data: fieldsErrorMessages} = error.response;
                     setFieldErrors(
-                        Object.entries(fieldsErrorMessages).reduce(
-                            (acc, [fieldName, errors]) => {
-                                acc[fieldName] = {
-                                    validateStatus: "error",
-                                    help: errors.join(" ")
-                                };
-                                return acc;
-                            },
-                            {}
-                        )
+                        parseErrorMessages(fieldsErrorMessages)
                     );
                 }
             }

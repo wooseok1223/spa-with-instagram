@@ -6,7 +6,7 @@ from .models import Post
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ["id", "username", "name", "avatar_url"]
+        fields = ["username", "name", "avatar_url"]
 
 
 class PostSerializer(serializers.ModelSerializer):
