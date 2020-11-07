@@ -1,5 +1,3 @@
-
-
 export function parseErrorMessages(fieldsErrorMessages) {
     return Object.entries(fieldsErrorMessages).reduce(
         (acc, [fieldName, errors]) => {

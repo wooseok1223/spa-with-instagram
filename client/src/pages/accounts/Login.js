@@ -1,14 +1,12 @@
 import React, {useState} from 'react'
-import Axios from 'axios'
 import {Form, Input, Button, notification, Card} from 'antd'
 import {useHistory, useLocation} from 'react-router-dom'
 import {SmileOutlined, FrownOutlined} from '@ant-design/icons';
-import useLocalStorage from "../../utils/useLocalStorage";
 import {setToken, useAppContext} from "../../store";
 import {parseErrorMessages} from "../../utils/forms";
+import {axiosInstance} from "api";
 
-
-const apiUrl = "http://127.0.0.1:8000/accounts/token/"
+const apiUrl = "/accounts/token/"
 
 
 export default function Login() {
@@ -31,7 +29,7 @@ export default function Login() {
             setFieldErrors({})
 
             try {
-                const response = await Axios.post(apiUrl, data)
+                const response = await axiosInstance.post(apiUrl, data)
 
                 const {data: {token: jwtToken}} = response
 

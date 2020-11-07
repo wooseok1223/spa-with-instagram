@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import {getBase64FormFile} from "../utils/base64";
 import {useAppContext} from "../store";
 import {parseErrorMessages} from "../utils/forms";
-import Axios from "axios";
 import {useHistory} from 'react-router-dom'
+import { axiosInstance} from "api";
 
 const UploadText = styled.div`
 `;
@@ -15,7 +15,7 @@ const ModalImage = styled.img`
     width:100%
 `
 
-const apiUrl = "http://127.0.0.1:8000/api/posts/"
+const apiUrl = "/api/posts/"
 
 export default function PostNewForm() {
     const {store: {jwtToken}} = useAppContext()
@@ -55,11 +55,9 @@ export default function PostNewForm() {
             formData.append("photo", file.originFileObj);
         });
 
-        console.log(formData)
 
         try {
-            const response = await Axios.post(apiUrl, formData, {headers})
-            console.log(response)
+            const response = await axiosInstance.post(apiUrl, formData, {headers})
 
             history.push('/')
         } catch (error) {
