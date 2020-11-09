@@ -5,8 +5,19 @@ import {SmileOutlined, FrownOutlined} from '@ant-design/icons';
 import {setToken, useAppContext} from "../../store";
 import {parseErrorMessages} from "../../utils/forms";
 import {axiosInstance} from "api";
+import styled from 'styled-components';
 
 const apiUrl = "/accounts/token/"
+
+
+const Container = styled.div`
+    display:grid;
+    grid-template-columns:repeat(1, 1fr);
+    gap:1rem;
+	width:1024px;
+	max-width:100%;
+	margin:10px auto;
+`;
 
 
 export default function Login() {
@@ -77,52 +88,54 @@ export default function Login() {
     };
 
     return (
-        <Card title="로그인">
-            <Form
-                {...layout}
-                onFinish={onFinish}
-                // onFinishFailed={onFinishFailed}
-            >
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your username!',
-                        },
-                        {
-                            min: 5,
-                            message: '5글자를 입력해주세요. ',
-                        }
-                    ]}
-                    hasFeedback
-                    {...fieldErrors.username}
-                    {...fieldErrors.non_field_errors}
+        <Container>
+            <Card title="로그인">
+                <Form
+                    {...layout}
+                    onFinish={onFinish}
+                    // onFinishFailed={onFinishFailed}
                 >
-                    <Input/>
-                </Form.Item>
+                    <Form.Item
+                        label="Username"
+                        name="username"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your username!',
+                            },
+                            {
+                                min: 5,
+                                message: '5글자를 입력해주세요. ',
+                            }
+                        ]}
+                        hasFeedback
+                        {...fieldErrors.username}
+                        {...fieldErrors.non_field_errors}
+                    >
+                        <Input/>
+                    </Form.Item>
 
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                    {...fieldErrors.password}
-                >
-                    <Input.Password/>
-                </Form.Item>
+                    <Form.Item
+                        label="Password"
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your password!',
+                            },
+                        ]}
+                        {...fieldErrors.password}
+                    >
+                        <Input.Password/>
+                    </Form.Item>
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
-        </Card>
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Card>
+        </Container>
     )
 }

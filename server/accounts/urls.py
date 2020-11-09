@@ -4,6 +4,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 
 urlpatterns = [
     path('signup/', views.SignView.as_view(), name='login'),
+    path('profile/', views.ProfileListAPIView.as_view(), name='profile'),
     path('token/', obtain_jwt_token),
     path('token/refresh', refresh_jwt_token),
     path('token/verify', verify_jwt_token),

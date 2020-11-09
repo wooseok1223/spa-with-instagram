@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404
 from rest_framework.response import Response
 
-from .serializers import SignupSerializer, SuggestionUserSerializer
+from .serializers import SignupSerializer, SuggestionUserSerializer, ProfileSerializer
 
 
 class SignView(CreateAPIView):
@@ -23,6 +23,17 @@ class SuggestionListAPIView(ListAPIView):
         qs = qs.exclude(pk=self.request.user.pk)
         qs = qs.exclude(pk__in=self.request.user.following_set.all())
         return qs
+
+
+class ProfileListAPIView(ListAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(pk=self.request.user.pk)
+        return qs
+
 
 @api_view(['POST'])
 def user_follow(request):

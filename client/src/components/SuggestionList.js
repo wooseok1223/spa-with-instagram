@@ -3,8 +3,11 @@ import {Card, Button} from "antd";
 import Suggestion from "./Suggestion";
 import {useAppContext} from "../store";
 import {useAxios, axiosInstance} from "api";
+
+
 const apiUrl = "/accounts/suggestions/"
 const followUrl = "/accounts/follow/"
+
 
 export default function SuggestionList({style}) {
     const {store: {jwtToken}} = useAppContext()

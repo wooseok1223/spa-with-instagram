@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
-import {Input, Menu} from 'antd'
-import StoryList from "./StoryList";
-import SuggestionList from "./SuggestionList";
-import LogoImage from "../assets/logo.png"
+import {Input} from 'antd'
+import MenuLayout from "./MenuLayout";
+import {Link} from "react-router-dom";
+import {useAppContext} from "../store";
+import {useAxios} from "../api";
 
 const Container = styled.div`
     display:grid;
@@ -39,29 +40,57 @@ const Title = styled.span`
     align-items:center;
     font-size:24px;
 `
+
+const apiUrl = "/accounts/profile/"
+
+
 export default function AppLayout({children, sidebar}) {
+    const {store: {jwtToken}} = useAppContext()
+    const headers = {'Authorization': `JWT ${jwtToken}`}
+
+    const [author, setAuthor] = useState({})
+
+    const [{data: originAuthor, loading, error}, refetch] = useAxios({
+        url: apiUrl,
+        headers
+    })
+    console.log(originAuthor)
+
+
+    useEffect(() => {
+        const data = {}
+        if (originAuthor) {
+
+            originAuthor.forEach((iter) => {
+                Object.assign(data, iter);
+            })
+
+            setAuthor(data)
+        }
+    }, [originAuthor])
+
+    console.log(author)
+
     return (
         <Container>
             <Header className="Header">
-                <Title>
-                    {/*<img src={LogoImage} alt="logo" width="103px" height="29px" />*/}
-                    LookBook
-                </Title>
+                <Link
+                    to={{
+                        pathname: "/",
+                    }}
+                >
+                    <Title>
+                        LookBook
+                    </Title>
+                </Link>
+
                 <div className="Search">
                     <Input.Search/>
                 </div>
                 <div className="topnav">
-                    <Menu mode="horizontal">
-                        <Menu.Item>
-                            Menu1
-                        </Menu.Item>
-                        <Menu.Item>
-                            Menu2
-                        </Menu.Item>
-                        <Menu.Item>
-                            Menu3
-                        </Menu.Item>
-                    </Menu>
+                    <MenuLayout
+                        author={author}
+                    />
                 </div>
             </Header>
             <Contents>
