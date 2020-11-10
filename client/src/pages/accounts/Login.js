@@ -18,7 +18,7 @@ const Container = styled.div`
 	max-width:100%;
 	margin:10px auto;
 `;
-
+const {item} = Form;
 
 export default function Login() {
     const {dispatch} = useAppContext()
@@ -32,10 +32,10 @@ export default function Login() {
     };
 
 
-    const onFinish = (values) => {
+    const onFinish = ({usename,password}) => {
         async function fn() {
-            const {username, password} = values
-            const data = {username, password}
+//             const {username, password} = values
+            const data = {username, password};
 
             setFieldErrors({})
 
@@ -95,7 +95,7 @@ export default function Login() {
                     onFinish={onFinish}
                     // onFinishFailed={onFinishFailed}
                 >
-                    <Form.Item
+                    <Item
                         label="Username"
                         name="username"
                         rules={[
@@ -109,13 +109,14 @@ export default function Login() {
                             }
                         ]}
                         hasFeedback
-                        {...fieldErrors.username}
-                        {...fieldErrors.non_field_errors}
+			errors={fieldErros} // 이런식으로 넘기는게 더 깔끔한 패턴인듯.
+//                         {...fieldErrors.username}
+//                         {...fieldErrors.non_field_errors}
                     >
                         <Input/>
-                    </Form.Item>
+                    </Item>
 
-                    <Form.Item
+                    <Item
                         label="Password"
                         name="password"
                         rules={[
@@ -127,7 +128,7 @@ export default function Login() {
                         {...fieldErrors.password}
                     >
                         <Input.Password/>
-                    </Form.Item>
+                    </Item>
 
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
