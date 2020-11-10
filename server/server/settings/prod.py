@@ -9,6 +9,8 @@ STATICFILES_STORAGE = 'server.storages.StaticAzureStorage'
 AZURE_ACCOUNT_NAME = os.environ["AZURE_ACCOUNT_NAME"]
 AZURE_ACCOUNT_KEY = os.environ["AZURE_ACCOUNT_KEY"]
 
+CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST", "").split(",")
+
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("DB_ENGINE", "django.db.backends.postgresql"),
