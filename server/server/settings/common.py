@@ -11,7 +11,7 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"],
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_SECRET_KEY': os.environ["SECRET_KEY"],
     'JWT_ALGORITHM': 'HS256',
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': timedelta(days=7),
