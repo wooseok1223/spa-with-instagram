@@ -1,13 +1,15 @@
 import React, {useState} from 'react'
-import {Form, Input, Button, notification, Card} from 'antd'
+import {Form, Input, Button, notification, Card, Typography, Row, Col, Menu} from 'antd'
 import {useHistory, useLocation} from 'react-router-dom'
 import {SmileOutlined, FrownOutlined} from '@ant-design/icons';
 import {setToken, useAppContext} from "../../store";
 import {parseErrorMessages} from "../../utils/forms";
 import {axiosInstance} from "api";
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
 
 const apiUrl = "/accounts/token/"
+const {Text} = Typography;
 
 
 const Container = styled.div`
@@ -36,12 +38,10 @@ export default function Login() {
         async function fn() {
             const {username, password} = values
             const data = {username, password}
-
             setFieldErrors({})
 
             try {
                 const response = await axiosInstance.post(apiUrl, data)
-
                 const {data: {token: jwtToken}} = response
 
                 // setJwtToken(jwtToken)
@@ -53,6 +53,7 @@ export default function Login() {
 
                 history.push(loginRedirectUrl)
             } catch (error) {
+                console.log(error.response)
                 if (error.response) {
                     notification.open({
                         message: "로그인 실패",
@@ -71,69 +72,84 @@ export default function Login() {
         fn();
     };
 
-    const layout = {
-        labelCol: {
-            span: 8,
-        },
-        wrapperCol: {
-            span: 16,
-        },
-    };
-
-    const tailLayout = {
-        wrapperCol: {
-            offset: 8,
-            span: 16,
-        },
-    };
 
     return (
         <Container>
-            <Card title="로그인">
+            <Card align="center" title={<Text strong>Sign In</Text>}>
                 <Form
-                    {...layout}
                     onFinish={onFinish}
                     // onFinishFailed={onFinishFailed}
                 >
-                    <Form.Item
-                        label="Username"
-                        name="username"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your username!',
-                            },
-                            {
-                                min: 5,
-                                message: '5글자를 입력해주세요. ',
-                            }
-                        ]}
-                        hasFeedback
-                        {...fieldErrors.username}
-                        {...fieldErrors.non_field_errors}
-                    >
-                        <Input/>
-                    </Form.Item>
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Username"
+                                name="username"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your username!',
+                                    },
+                                    {
+                                        min: 5,
+                                        message: '5글자를 입력해주세요. ',
+                                    }
+                                ]}
+                                hasFeedback
+                                {...fieldErrors.username}
+                                {...fieldErrors.non_field_errors}
+                                align="center"
+                            >
+                                <Input/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Password"
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your password!',
+                                    },
+                                ]}
+                                {...fieldErrors.password}
+                                align="center"
+                            >
+                                <Input.Password/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
 
-                    <Form.Item
-                        label="Password"
-                        name="password"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your password!',
-                            },
-                        ]}
-                        {...fieldErrors.password}
-                    >
-                        <Input.Password/>
-                    </Form.Item>
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                align="center"
+                            >
+                                <Button type="primary" htmlType="submit" block>
+                                    Login
+                                </Button>
+                            </Form.Item>
+                        </Col>
+                    </Row>
 
-                    <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                    </Form.Item>
+                    <Row align="center">
+                        <Col span={12} align="center"><Text mark>Forgot your password.</Text></Col>
+                        <Col span={12} align="center">
+                            <Link
+                                to={{
+                                    pathname: "/accounts/signup",
+                                }}
+                            >
+                                <Text mark>
+                                    Don't have an account? Sign Up
+                                </Text>
+                            </Link>
+                        </Col>
+                    </Row>
+
                 </Form>
             </Card>
         </Container>

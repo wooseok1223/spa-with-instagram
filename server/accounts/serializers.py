@@ -16,21 +16,31 @@ class SignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ['pk', 'username', 'password']
+        fields = ['pk', 'username', 'password', 'first_name', 'last_name', 'email', 'phone_number']
 
 
 class SuggestionUserSerializer(serializers.ModelSerializer):
+    avatar_url = serializers.SerializerMethodField("avatar_url_field")
+
+    def avatar_url_field(self, author):
+        if re.match(r"^https?://", author.avatar_url):
+            return author.avatar_url
+
+        if "request" in self.context:
+            scheme = self.context["request"].scheme
+            host = self.context["request"].get_host()
+            return scheme + "://" + host + author.avatar_url
 
     class Meta:
         model = get_user_model()
         fields = ['username', 'name', 'avatar_url']
 
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField("avatar_url_field")
 
     def avatar_url_field(self, author):
-        print(author)
         if re.match(r"^https?://", author.avatar_url):
             return author.avatar_url
 

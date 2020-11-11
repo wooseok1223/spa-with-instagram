@@ -1,30 +1,25 @@
 import React, {useState} from 'react'
-import {Form, Input, Button, notification} from 'antd'
+import {Form, Input, Button, notification, Card, Col, Row} from 'antd'
 import {useHistory} from 'react-router-dom'
 import {SmileOutlined, FrownOutlined} from '@ant-design/icons';
 import {axiosInstance} from "api";
+import styled from "styled-components";
 
 const apiUrl = "/accounts/signup/"
+
+
+const Container = styled.div`
+    display:grid;
+    grid-template-columns:repeat(1, 1fr);
+    gap:1rem;
+	width:1024px;
+	max-width:100%;
+	margin:10px auto;
+`;
 
 export default function Signup() {
     const history = useHistory()
     const [fieldErrors, setFieldErrors] = useState({})
-
-    const layout = {
-        labelCol: {
-            span: 8,
-        },
-        wrapperCol: {
-            span: 16,
-        },
-    };
-
-    const tailLayout = {
-        wrapperCol: {
-            offset: 8,
-            span: 16,
-        },
-    };
 
     const onFinish = (values) => {
         async function fn() {
@@ -72,49 +67,66 @@ export default function Signup() {
     };
 
     return (
-        <Form
-            {...layout}
-            onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
-        >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your username!',
-                    },
-                    {
-                        min: 5,
-                        message: '5글자를 입력해주세요. ',
-                    }
-                ]}
-                hasFeedback
-                {...fieldErrors.username}
-            >
-                <Input/>
-            </Form.Item>
+        <Container>
+            <Card align="center" title="Sign up">
+                <Form
+                    onFinish={onFinish}
+                    // onFinishFailed={onFinishFailed}
+                >
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Username"
+                                name="username"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your username!',
+                                    },
+                                    {
+                                        min: 5,
+                                        message: '5글자를 입력해주세요. ',
+                                    }
+                                ]}
+                                hasFeedback
+                                {...fieldErrors.username}
+                            >
+                                <Input/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
 
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
-                {...fieldErrors.password}
-            >
-                <Input.Password/>
-            </Form.Item>
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Password"
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your password!',
+                                    },
+                                ]}
+                                {...fieldErrors.password}
+                            >
+                                <Input.Password/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
 
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                align="center"
+                            >
+                                <Button type="primary" htmlType="submit" block>
+                                    SignUp
+                                </Button>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+            </Card>
+        </Container>
     )
 }
