@@ -48,6 +48,7 @@ export default function Profile() {
             setAuthor(data)
         }
     }, [originAuthor])
+
     console.log(author)
 
     return (

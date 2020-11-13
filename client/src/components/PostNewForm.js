@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import {getBase64FormFile} from "../utils/base64";
 import {useAppContext} from "../store";
 import {parseErrorMessages} from "../utils/forms";
-import {useHistory} from 'react-router-dom'
-import { axiosInstance} from "api";
+import {axiosInstance} from "api";
 
 const UploadText = styled.div`
 `;
@@ -19,7 +18,6 @@ const apiUrl = "/api/posts/"
 
 export default function PostNewForm() {
     const {store: {jwtToken}} = useAppContext()
-    const history = useHistory()
     const [fieldErrors, setFieldErrors] = useState({})
     const [previewPhoto, setPreviewPhoto] = useState({
         visible: false,
@@ -59,7 +57,7 @@ export default function PostNewForm() {
         try {
             const response = await axiosInstance.post(apiUrl, formData, {headers})
 
-            history.push('/')
+            window.location.replace("/")
         } catch (error) {
             if (error.response) {
                 const {status, data: fieldsErrorMessages} = error.response;

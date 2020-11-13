@@ -23,8 +23,8 @@ export default function Signup() {
 
     const onFinish = (values) => {
         async function fn() {
-            const {username, password} = values
-            const data = {username, password}
+            const {username, password, first_name, last_name, email} = values
+            const data = {username, password, first_name, last_name, email }
 
             setFieldErrors({})
 
@@ -71,7 +71,6 @@ export default function Signup() {
             <Card align="center" title="Sign up">
                 <Form
                     onFinish={onFinish}
-                    // onFinishFailed={onFinishFailed}
                 >
                     <Row align="center">
                         <Col span={12}>
@@ -109,7 +108,61 @@ export default function Signup() {
                                 ]}
                                 {...fieldErrors.password}
                             >
-                                <Input.Password/>
+                                <Input.Password />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Email"
+                                name="email"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your email!',
+                                    },
+                                ]}
+                                {...fieldErrors.email}
+                            >
+                                <Input/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Firstname"
+                                name="first_name"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your firstname!',
+                                    },
+                                ]}
+                                {...fieldErrors.first_name}
+                            >
+                                <Input/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Row align="center">
+                        <Col span={12}>
+                            <Form.Item
+                                label="Lastname"
+                                name="last_name"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your last_name!',
+                                    },
+                                ]}
+                                {...fieldErrors.last_name}
+                            >
+                                <Input/>
                             </Form.Item>
                         </Col>
                     </Row>

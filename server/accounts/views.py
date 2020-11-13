@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, action
-from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404
+from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404, UpdateAPIView
 from rest_framework.response import Response
 
 from .serializers import SignupSerializer, SuggestionUserSerializer, ProfileSerializer
@@ -13,6 +13,15 @@ class SignView(CreateAPIView):
     model = get_user_model()
     serializer_class = SignupSerializer
     permission_classes = [permissions.AllowAny]
+
+
+class UserUpdateView(UpdateAPIView):
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        qs = get_user_model().objects.all()
+        qs = qs.filter(pk=self.request.user.pk)
+        return qs
 
 
 class SuggestionListAPIView(ListAPIView):
