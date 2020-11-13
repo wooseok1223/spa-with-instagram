@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {Avatar, Card, Button, Col, Row, Typography, Input} from "antd";
 import styled from "styled-components";
-import {UserOutlined} from '@ant-design/icons';
 import {useAppContext} from "../../store";
 import {useAxios} from "../../api";
 import {Link} from "react-router-dom";
-import AppLayout from "../../components/AppLayout";
-import MenuLayout from "../../components/MenuLayout";
 
 const {Text, Title} = Typography;
 

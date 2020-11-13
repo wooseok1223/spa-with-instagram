@@ -1,5 +1,5 @@
-import React, {useMemo, useState, useEffect} from 'react'
-import {Card, Button} from "antd";
+import React, {useState, useEffect} from 'react'
+import { Card } from "antd";
 import Suggestion from "./Suggestion";
 import {useAppContext} from "../store";
 import {useAxios, axiosInstance} from "api";
