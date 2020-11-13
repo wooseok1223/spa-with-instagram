@@ -54,7 +54,6 @@ export default function AppLayout({children, sidebar}) {
         url: apiUrl,
         headers
     })
-    console.log(originAuthor)
 
 
     useEffect(() => {
@@ -69,7 +68,6 @@ export default function AppLayout({children, sidebar}) {
         }
     }, [originAuthor])
 
-    console.log(author)
 
     return (
         <Container>
