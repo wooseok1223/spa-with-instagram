@@ -2,6 +2,13 @@ import React from 'react'
 import {Avatar, Card } from 'antd'
 import {HeartOutlined, HeartTwoTone} from '@ant-design/icons';
 import CommentList from "./CommentList";
+import styled from "styled-components";
+
+
+
+const Box = styled.span`
+    margin:300px 100px 100px 100px;
+`
 
 
 export default function Post({post, handleLike}) {
@@ -32,6 +39,8 @@ export default function Post({post, handleLike}) {
                     description={caption}>
                     style={{marginBottom:"1em"}}
                 </Card.Meta>
+
+                <Box/>
 
                 <CommentList post={post}/>
 

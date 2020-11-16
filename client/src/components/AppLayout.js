@@ -19,6 +19,19 @@ const Container = styled.div`
         "Footer Footer Footer";
 `;
 
+const AccountsContainer = styled.div`
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1rem;
+	width:1024px;
+	max-width:100%;
+	margin:10px auto;
+	grid-template-areas:
+        "Header Header Header"
+        "Contents Contents Contents"
+        "Footer Footer Footer";
+`;
+
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
@@ -70,38 +83,69 @@ export default function AppLayout({children, sidebar}) {
 
 
     return (
-        <Container>
-            <Header className="Header">
-                <Link
-                    to={{
-                        pathname: "/",
-                    }}
-                >
-                    <Title>
-                        LookBook
-                    </Title>
-                </Link>
+        <>
+            {sidebar ? <Container>
+                    <Header className="Header">
+                        <Link
+                            to={{
+                                pathname: "/",
+                            }}
+                        >
+                            <Title>
+                                LookBook
+                            </Title>
+                        </Link>
 
-                <div className="Search">
-                    <Input.Search/>
-                </div>
-                <div className="topnav">
-                    <MenuLayout
-                        author={author}
-                    />
-                </div>
-            </Header>
-            <Contents>
-                {children}
-            </Contents>
-            <Sidebar>
-                {sidebar}
-            </Sidebar>
-            <Footer>
-                &copy; 2020. WOOSEOK
-            </Footer>
+                        <div className="Search">
+                            <Input.Search/>
+                        </div>
+                        <div className="topnav">
+                            <MenuLayout
+                                author={author}
+                            />
+                        </div>
+                    </Header>
+                    <Contents>
+                        {children}
+                    </Contents>
+                    {sidebar ? <Sidebar>
+                        {sidebar}
+                    </Sidebar> : <></>}
+                    <Footer>
+                        &copy; 2020. WOOSEOK
+                    </Footer>
+                </Container> :
+                <AccountsContainer>
+                    <Header className="Header">
+                        <Link
+                            to={{
+                                pathname: "/",
+                            }}
+                        >
+                            <Title>
+                                LookBook
+                            </Title>
+                        </Link>
 
-
-        </Container>
+                        <div className="Search">
+                            <Input.Search/>
+                        </div>
+                        <div className="topnav">
+                            <MenuLayout
+                                author={author}
+                            />
+                        </div>
+                    </Header>
+                    <Contents>
+                        {children}
+                    </Contents>
+                    {sidebar ? <Sidebar>
+                        {sidebar}
+                    </Sidebar> : <></>}
+                    <Footer>
+                        &copy; 2020. WOOSEOK
+                    </Footer>
+                </AccountsContainer>}
+        </>
     )
 }

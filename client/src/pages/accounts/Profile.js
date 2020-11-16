@@ -20,15 +20,6 @@ const NameTitle = styled.div`
 	margin:10px auto;
 `;
 
-const Header = styled.div`
-    text-align:center;
-    align:center;
-`
-
-const HeaderTitle = styled.span`
-    text-align:center;
-    font-size:24px;
-`
 
 const apiUrl = "/accounts/profile/"
 
@@ -57,58 +48,45 @@ export default function Profile() {
 
 
     return (
-        <div>
-            <Header>
-                <Link
-                    to={{
-                        pathname: "/",
-                    }}
-                >
-                    <HeaderTitle>
-                        LookBook
-                    </HeaderTitle>
-                </Link>
-            </Header>
-            <Container>
-                <Card align="center">
-                    <Row align="center">
-                        <Col span={18} push={6}>
-                            <Card>
-                                <Col span={12} align="left">
-                                    <NameTitle>
-                                        <Title level={2}>{author.username}</Title>
-                                        <Link
-                                            to={{
-                                                pathname: "/accounts/profileEdit",
-                                            }}
-                                            style={{marginTop: "10px"}}
-                                        >
+        <Container>
+            <Card align="center">
+                <Row align="center">
+                    <Col span={18} push={6}>
+                        <Card>
+                            <Col span={12} align="left">
+                                <NameTitle>
+                                    <Title level={2}>{author.username}</Title>
+                                    <Link
+                                        to={{
+                                            pathname: "/accounts/profileEdit",
+                                        }}
+                                        style={{marginTop: "10px"}}
+                                    >
                                             <span>
                                                 프로필 수정으로 이동
                                             </span>
-                                        </Link>
-                                    </NameTitle>
-                                </Col>
-                                <Col span={12} align="left">
-                                    <Text>{author.email}</Text>
-                                </Col>
-                                <Col span={12} align="left">
-                                    <Text>{author.first_name}{author.last_name}</Text>
-                                </Col>
-                                <Col span={12} align="left">
-                                    <Text mark>게시물 : 0 팔로워 : 0 팔로우 : 0</Text>
-                                </Col>
-                            </Card>
-                        </Col>
-                        <Col span={6} pull={18}>
-                            <Avatar size={200} icon={<img src={author.avatar_url} alt="user_profile"/>}/>
-                        </Col>
-                    </Row>
-                    <Row align="center">
+                                    </Link>
+                                </NameTitle>
+                            </Col>
+                            <Col span={12} align="left">
+                                <Text>{author.email}</Text>
+                            </Col>
+                            <Col span={12} align="left">
+                                <Text>{author.first_name}{author.last_name}</Text>
+                            </Col>
+                            <Col span={12} align="left">
+                                <Text mark>게시물 : 0 팔로워 : 0 팔로우 : 0</Text>
+                            </Col>
+                        </Card>
+                    </Col>
+                    <Col span={6} pull={18}>
+                        <Avatar size={200} icon={<img src={author.avatar_url} alt="user_profile"/>}/>
+                    </Col>
+                </Row>
+                <Row align="center">
 
-                    </Row>
-                </Card>
-            </Container>
-        </div>
+                </Row>
+            </Card>
+        </Container>
     )
 }

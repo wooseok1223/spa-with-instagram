@@ -46,8 +46,8 @@ export default function ProfileEdit() {
 
     const onFinish = (values) => {
         async function fn() {
-            const {username, password, first_name, last_name, email} = values
-            const data = {username, password, first_name, last_name, email}
+            const {username, first_name, last_name, email} = values
+            const data = {username, first_name, last_name, email}
 
             setFieldErrors({})
             try {
@@ -118,24 +118,6 @@ export default function ProfileEdit() {
                                 {...fieldErrors.username}
                             >
                                 <Input/>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Row align="center">
-                        <Col span={12}>
-                            <Form.Item
-                                label="Password"
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your password!',
-                                    },
-                                ]}
-                                {...fieldErrors.password}
-                            >
-                                <Input.Password/>
                             </Form.Item>
                         </Col>
                     </Row>

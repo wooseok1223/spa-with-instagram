@@ -4,6 +4,8 @@ import {useAppContext} from "../store";
 import Comment from "./Comment";
 import { useAxios, axiosInstance} from "api";
 
+
+
 export default function CommentList({post}) {
     const {
         store: {jwtToken}
@@ -13,7 +15,7 @@ export default function CommentList({post}) {
 
     const headers = {Authorization: `JWT ${jwtToken}`};
 
-    const [{data: commentList, loading, error}, refetch] = useAxios({
+    const [{data: commentList, loading,  error}, refetch] = useAxios({
         url: `/api/posts/${post.id}/comments/`,
         headers
     });
