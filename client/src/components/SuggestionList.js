@@ -38,6 +38,7 @@ export default function SuggestionList({style}) {
                         (user.username !== username) ? user : {...user, is_follow: true}
                     )
                 )
+                window.location.replace("/")
             })
             .catch(error => {
                 console.log(error)

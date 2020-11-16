@@ -57,4 +57,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ['pk', 'avatar_url', 'first_name', 'last_name', 'website_url',
-                  'bio', 'phone_number', 'gender', "email", "username"]
+                  'bio', 'phone_number', 'gender', "email", "username",
+                  "follower_set", "following_set"]

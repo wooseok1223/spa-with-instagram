@@ -46,7 +46,6 @@ export default function Profile() {
         }
     }, [originAuthor])
 
-
     return (
         <Container>
             <Card align="center">
@@ -75,7 +74,7 @@ export default function Profile() {
                                 <Text>{author.first_name}{author.last_name}</Text>
                             </Col>
                             <Col span={12} align="left">
-                                <Text mark>게시물 : 0 팔로워 : 0 팔로우 : 0</Text>
+                                <Text mark>게시물 : 0 팔로워 : {author.follower_set ? author.follower_set.length : 0} 팔로우 : {author.follower_set ? author.following_set.length : 0}</Text>
                             </Col>
                         </Card>
                     </Col>
